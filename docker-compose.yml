@@ -6,11 +6,11 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__API__SECRET_KEY: projet-ecommerce-secret
     AIRFLOW_CONN_ELASTICSEARCH_DEFAULT: http://elasticsearch:9200
-    _PIP_ADDITIONAL_REQUIREMENTS: "requests==2.32.3"
   volumes:
     - ./dags:/opt/airflow/dags
     - ./scripts:/opt/airflow/scripts
     - ./data:/opt/airflow/data
+    - ./elasticsearch:/opt/airflow/elasticsearch
   depends_on:
     postgres:
       condition: service_healthy
@@ -46,6 +46,7 @@ services:
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"
+      cluster.routing.allocation.disk.threshold_enabled: "false"
       ES_JAVA_OPTS: "-Xms1g -Xmx1g"
     ports:
       - "9200:9200"

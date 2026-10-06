@@ -1,0 +1,88 @@
+{
+  "chiffre_affaires_par_categorie": {
+    "description": "Quelles catégories rapportent le plus de chiffre d'affaires ?",
+    "index": "sales",
+    "body": {
+      "size": 0,
+      "aggs": {
+        "par_categorie": {
+          "terms": { "field": "category", "size": 20, "order": { "ca": "desc" } },
+          "aggs": {
+            "ca": { "sum": { "field": "line_total" } }
+          }
+        }
+      }
+    }
+  },
+  "top_produits_vendus": {
+    "description": "Quels sont les 10 produits vendus en plus grande quantité ?",
+    "index": "sales",
+    "body": {
+      "size": 0,
+      "aggs": {
+        "top_produits": {
+          "terms": { "field": "title.raw", "size": 10, "order": { "quantite": "desc" } },
+          "aggs": {
+            "quantite": { "sum": { "field": "quantity" } }
+          }
+        }
+      }
+    }
+  },
+  "prix_moyen_ligne_par_marque": {
+    "description": "Quel est le montant moyen d'une ligne de vente selon la marque ?",
+    "index": "sales",
+    "body": {
+      "size": 0,
+      "aggs": {
+        "par_marque": {
+          "terms": { "field": "brand", "size": 15 },
+          "aggs": {
+            "montant_moyen": { "avg": { "field": "line_total" } }
+          }
+        }
+      }
+    }
+  },
+  "note_moyenne_par_categorie": {
+    "description": "Quelles catégories sont les mieux notées par les clients ?",
+    "index": "products",
+    "body": {
+      "size": 0,
+      "aggs": {
+        "par_categorie": {
+          "terms": { "field": "category", "size": 30 },
+          "aggs": {
+            "note_moyenne": { "avg": { "field": "average_review_rating" } },
+            "nombre_produits": { "value_count": { "field": "product_id" } }
+          }
+        }
+      }
+    }
+  },
+  "produits_stock_faible": {
+    "description": "Quels produits risquent la rupture (moins de 10 unités en stock) ?",
+    "index": "products",
+    "body": {
+      "size": 20,
+      "query": { "range": { "stock": { "lt": 10 } } },
+      "sort": [{ "stock": "asc" }],
+      "_source": ["title", "category", "brand", "stock", "final_price"]
+    }
+  },
+  "valeur_stock_par_categorie": {
+    "description": "Quelle est la valeur immobilisée en stock par catégorie ?",
+    "index": "products",
+    "body": {
+      "size": 0,
+      "aggs": {
+        "par_categorie": {
+          "terms": { "field": "category", "size": 30, "order": { "valeur": "desc" } },
+          "aggs": {
+            "valeur": { "sum": { "field": "stock_value" } }
+          }
+        }
+      }
+    }
+  }
+}

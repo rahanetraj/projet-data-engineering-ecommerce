@@ -29,6 +29,7 @@
   "sales": {
     "mappings": {
       "properties": {
+        "line_id": { "type": "keyword" },
         "cart_id": { "type": "integer" },
         "user_id": { "type": "integer" },
         "product_id": { "type": "integer" },

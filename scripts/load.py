@@ -51,7 +51,7 @@ def load(es_url: str = DEFAULT_ES_URL) -> dict[str, int]:
     create_indices(es_url, mapping)
 
     product_docs = [(str(p["product_id"]), p) for p in products]
-    sale_docs = [(f"{s['cart_id']}-{s['product_id']}", s) for s in sales]
+    sale_docs = [(s["line_id"], s) for s in sales]
 
     loaded = {
         "products": bulk_index(es_url, "products", product_docs),

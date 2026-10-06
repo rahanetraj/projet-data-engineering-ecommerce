@@ -53,6 +53,8 @@ def validate_sales(sales: list[dict], products: list[dict], failures: list[str])
         "chaque vente correspond à un produit du catalogue",
         failures,
     )
+    line_ids = [s["line_id"] for s in sales]
+    check(len(line_ids) == len(set(line_ids)), "line_id est unique pour chaque ligne de vente", failures)
     check(all(s["quantity"] > 0 for s in sales), "les quantités sont strictement positives", failures)
     check(
         all(abs(s["line_total"] - s["unit_price"] * s["quantity"]) < 0.01 for s in sales),

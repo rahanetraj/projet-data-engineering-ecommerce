@@ -64,9 +64,10 @@ def transform_products(raw: list[dict]) -> list[dict]:
 def transform_sales(carts: list[dict], catalog: dict[int, dict]) -> list[dict]:
     sales = []
     for cart in deduplicate(carts, "id"):
-        for line in cart["products"]:
+        for line_number, line in enumerate(cart["products"], start=1):
             product = catalog[line["id"]]
             sales.append({
+                "line_id": f"{cart['id']}-{line_number}",
                 "cart_id": cart["id"],
                 "user_id": cart["userId"],
                 "product_id": line["id"],
