@@ -124,7 +124,7 @@ Quelques résultats observés lors de l'exécution :
 
 Le tableau de bord « e-commerce » contient quatre visualisations :
 
-1. **CA par catégorie** : histogramme de la somme de `line_total` par catégorie (top 10).
+1. **CA par catégorie** : camembert de la somme de `line_total` par catégorie (top 10), pour voir la part de chaque catégorie dans le chiffre d'affaires.
 2. **Top produits vendus** : somme des quantités par produit (top 10).
 3. **Produits en stock faible** : tableau des produits dont le stock est inférieur à 10, trié par stock croissant.
 4. **Note moyenne par catégorie** : moyenne des notes par catégorie (top 30).
