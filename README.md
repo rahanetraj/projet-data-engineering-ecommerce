@@ -117,7 +117,7 @@ Les requêtes sont dans `elasticsearch/queries.json`. Chacune répond à une que
 
 Quelques résultats observés lors de l'exécution :
 - la catégorie `vehicle` concentre le plus gros chiffre d'affaires, avec environ 1,68 M€ ;
-- « Decoration Swing » est le produit le plus vendu, avec environ 2 150 unités ;
+- les ventes sont très dispersées : les 10 produits les plus vendus totalisent 275 unités sur 2 417, et le reste est réparti sur 188 produits distincts. Le produit en tête est « Cat Food » (37 unités) ;
 - plusieurs produits sont en rupture de stock (stock à 0).
 
 ## Tableau de bord Kibana
