@@ -1,0 +1,44 @@
+{
+  "products": {
+    "mappings": {
+      "properties": {
+        "product_id": { "type": "integer" },
+        "title": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
+        "category": { "type": "keyword" },
+        "brand": { "type": "keyword" },
+        "sku": { "type": "keyword" },
+        "price": { "type": "float" },
+        "discount_percentage": { "type": "float" },
+        "final_price": { "type": "float" },
+        "stock": { "type": "integer" },
+        "stock_value": { "type": "float" },
+        "rating": { "type": "float" },
+        "review_count": { "type": "integer" },
+        "average_review_rating": { "type": "float" },
+        "reviews": {
+          "properties": {
+            "rating": { "type": "integer" },
+            "comment": { "type": "text" },
+            "date": { "type": "date", "format": "yyyy-MM-dd" },
+            "reviewer": { "type": "keyword" }
+          }
+        }
+      }
+    }
+  },
+  "sales": {
+    "mappings": {
+      "properties": {
+        "cart_id": { "type": "integer" },
+        "user_id": { "type": "integer" },
+        "product_id": { "type": "integer" },
+        "title": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
+        "category": { "type": "keyword" },
+        "brand": { "type": "keyword" },
+        "quantity": { "type": "integer" },
+        "unit_price": { "type": "float" },
+        "line_total": { "type": "float" }
+      }
+    }
+  }
+}
