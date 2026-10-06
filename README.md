@@ -254,7 +254,14 @@ Une fois le run terminé, les quatre tâches sont en succès :
 
 La démonstration est en deux parties :
 
-1. [Partie 1](https://www.loom.com/share/1c00245d981d41299d651b1ebde1458e)
-2. [Partie 2](https://www.loom.com/share/ec9f8b4356b84623888c330f3ef9cbc4)
+**Partie 1 : présentation du projet (5 min)**
+
+[![Partie 1 : présentation du projet](https://cdn.loom.com/sessions/thumbnails/1c00245d981d41299d651b1ebde1458e-848aa5159c5a5d6e.gif)](https://www.loom.com/share/1c00245d981d41299d651b1ebde1458e)
+
+**Partie 2 : du pipeline Airflow à Kibana (2 min 37)**
+
+[![Partie 2 : du pipeline Airflow à Kibana](https://cdn.loom.com/sessions/thumbnails/ec9f8b4356b84623888c330f3ef9cbc4-55b57d6c257a2d2b.gif)](https://www.loom.com/share/ec9f8b4356b84623888c330f3ef9cbc4)
+
+Cliquer sur une image pour ouvrir la vidéo sur Loom.
 
 Elle montre le déclenchement du DAG, les données dans Elasticsearch et le tableau de bord Kibana.
