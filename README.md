@@ -139,7 +139,8 @@ Deux vues de données (`sales` et `products`) alimentent ces visualisations. Le 
 
 - Docker et Docker Compose ;
 - environ 4 Go de mémoire disponible pour les conteneurs ;
-- accès à Internet pour récupérer les images et les données.
+- accès à Internet pour récupérer les images et les données ;
+- les ports **8081**, **9200** et **5601** libres sur la machine.
 
 ### Étapes
 
@@ -149,30 +150,43 @@ Deux vues de données (`sales` et `products`) alimentent ces visualisations. Le 
    cd projet-data-engineering-ecommerce
    ```
 
-2. Lancer la stack :
+2. Préparer la machine (une seule fois) :
+   - **Linux** : Elasticsearch exige une valeur minimale pour `vm.max_map_count`.
+     ```bash
+     sudo sysctl -w vm.max_map_count=262144
+     ```
+     Pour que ce réglage survive au redémarrage, ajouter `vm.max_map_count=262144` dans `/etc/sysctl.conf`.
+   - **Windows et macOS** : dans Docker Desktop, la machine virtuelle doit disposer d'au moins 4 Go de mémoire.
+   - Créer le dossier des données, accessible en écriture par Airflow :
+     ```bash
+     mkdir -p data
+     chmod 777 data
+     ```
+
+3. Lancer la stack :
    ```bash
    docker compose up -d
    docker compose ps
    ```
    Attendre que les services soient `healthy`. Le premier démarrage peut prendre plusieurs minutes, le temps de télécharger les images.
 
-3. Récupérer le mot de passe admin d'Airflow. Il est généré à chaque création du conteneur :
+4. Récupérer le mot de passe admin d'Airflow. Il est généré à chaque création du conteneur :
    ```bash
    docker compose logs airflow | grep -i password
    ```
 
-4. Ouvrir Airflow sur http://localhost:8081, se connecter avec `admin` et le mot de passe trouvé, activer le DAG `etl_ecommerce` puis cliquer sur **Déclencher**. Les quatre tâches (`extract`, `transform`, `validate`, `load`) doivent passer au vert.
+5. Ouvrir Airflow sur http://localhost:8081, se connecter avec `admin` et le mot de passe trouvé, activer le DAG `etl_ecommerce` puis cliquer sur **Déclencher**. Les quatre tâches (`extract`, `transform`, `validate`, `load`) doivent passer au vert.
 
-5. Vérifier les données dans Elasticsearch :
+6. Vérifier les données dans Elasticsearch :
    ```bash
    curl "http://localhost:9200/_cat/indices?v"
    curl "http://localhost:9200/sales/_count"    # 800
    curl "http://localhost:9200/products/_count" # 194
    ```
 
-6. Importer le tableau de bord dans Kibana (http://localhost:5601) : menu **Gestion de la Suite** → **Objets enregistrés** → **Importer**, puis sélectionner `kibana/dashboard.ndjson`.
+7. Importer le tableau de bord dans Kibana (http://localhost:5601) : menu **Gestion de la Suite** → **Objets enregistrés** → **Importer**, puis sélectionner `kibana/dashboard.ndjson`.
 
-7. Arrêter la stack :
+8. Arrêter la stack :
    ```bash
    docker compose down
    ```
