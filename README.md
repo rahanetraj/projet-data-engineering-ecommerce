@@ -252,6 +252,9 @@ Une fois le run terminé, les quatre tâches sont en succès :
 
 ## Démonstration
 
-Vidéo de démonstration : *à ajouter*.
+La démonstration est en deux parties :
+
+1. [Partie 1](https://www.loom.com/share/1c00245d981d41299d651b1ebde1458e)
+2. [Partie 2](https://www.loom.com/share/ec9f8b4356b84623888c330f3ef9cbc4)
 
 Elle montre le déclenchement du DAG, les données dans Elasticsearch et le tableau de bord Kibana.
